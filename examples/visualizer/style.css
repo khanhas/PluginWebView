@@ -1,0 +1,121 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Ropa Sans', sans-serif;
+  color: #412fa9;
+  box-sizing: border-box;
+  overflow: hidden;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+}
+
+h1 {
+  padding: 0;
+  margin: 0;
+  color: inherit;
+}
+
+.play-intro {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: none;
+  transform: translate(-50%, -50%);
+  height: 100px;
+  width: 100px;
+  cursor: pointer;
+}
+
+.play-intro svg {
+  width: 100%;
+}
+
+.loader {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  z-index: 0;
+  transform: scale(0, 1);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  background: linear-gradient(to right, #6000de, #fc00ff);
+}
+
+a {
+  color: #412fa9;
+  text-decoration: none;
+}
+
+.credits {
+  margin: 20px;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+}
+
+.credits h1 {
+  font-size: 20pt;
+  width: 80%;
+  line-height: 1.4;
+}
+
+.credits .controls svg {
+  width: 50px;
+}
+
+.removeLoader {
+  transform-origin: bottom;
+  transition: transform 0.3s 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+button {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.controls {
+  position: absolute;
+  right: 30px;
+  top: 10px;
+}
+
+.play {
+  display: none;
+}
+
+.pause {
+  display: none;
+}
+
+.control-show {
+  display: block;
+}
+
+@media screen and (min-width: 768px) {
+  .credits {
+    margin-left: 20px;
+    margin-top: 20px;
+    position: absolute;
+    z-index: 1;
+    bottom: inherit;
+    width: 100%;
+  }
+  .credits h1 {
+    font-size: 22pt;
+    width: auto;
+    line-height: 1.4;
+  }
+  .credits .controls {
+    right: 50px;
+  }
+  .credits .controls svg {
+    width: auto;
+  }
+}

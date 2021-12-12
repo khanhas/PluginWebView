@@ -1,0 +1,49 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="background">
+            <div class="Circle1"></div>
+            <div class="Circle2"></div>
+            <div class="Circle3"></div>
+            <div class="content">
+                <h1 class="Condition"><i class="material-icons sun">wb_sunny</i> <span id="ConditionSpan">Sunny</span>
+                </h1>
+                <h1 class="Temp"><span id="TempSpan">30</span><span id="F">°C</span></h1>
+                <h1 class="Time">09:35</h1>
+                <h1 class="Location"><i class="material-icons locationIcon">place</i> <span
+                        id="LocationSpan">Sunny</span></h1>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const cityID = 1568510;
+
+        fetch(`https://openweathermap.org/data/2.5/weather?id=${cityID}&appid=439d4b804bc8187953eb36d2a8c26a02`)
+            .then(a => a.json())
+            .then(data => {
+                const condition = data.weather[0].main;
+                const temp = Math.round(data.main.temp);
+                document.querySelector("#ConditionSpan").innerText = condition;
+                document.querySelector("#TempSpan").innerText = temp;
+                document.querySelector("#LocationSpan").innerText = `${data.name}, ${data.sys.country}`;
+            });
+
+        function zeroPad(number) {
+            if (number < 9) return "0" + number;
+            return number;
+        }
+
+        const dateElement = document.querySelector(".Time");
+        setInterval(() => {
+            const date = new Date;
+            dateElement.innerText = `${zeroPad(date.getHours())}:${zeroPad(date.getMinutes())}`;
+        }, 1000);
+    </script>
+</body>

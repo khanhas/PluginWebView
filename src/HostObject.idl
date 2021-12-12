@@ -1,0 +1,85 @@
+// Copyright (C) 2022 khanhas. All rights reserved.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[uuid(0a7a4655-5660-47d0-8a37-98ae21399e57), version(0.1)]
+library PluginWebViewLibrary
+{
+    //! [HostObjectMeasureInterface]
+    [uuid(8bd9aa0b-6cc5-4dac-ae50-578e9d24c064), object, local]
+    interface IHostObjectMeasure : IUnknown
+    {
+        // Methods
+        HRESULT GetString([out, retval] BSTR*);
+        HRESULT GetNumber([out, retval] double*);
+        HRESULT GetOption([in] BSTR, [in] BOOL, [out, retval] BSTR*);
+        HRESULT Command([in] BSTR);
+        HRESULT Update();
+
+        [propget] HRESULT Disabled([out, retval] BOOL*);
+        [propput] HRESULT Disabled([in] BOOL);
+        [propget] HRESULT Paused([out, retval] BOOL*);
+        [propput] HRESULT Paused([in] BOOL);
+        [propget] HRESULT DynamicVariables([out, retval] BOOL*);
+        [propput] HRESULT DynamicVariables([in] BOOL);
+    };
+    //! [HostObjectMeasureInterface]
+
+    [uuid(ddc1eedc-ac0d-46dc-9005-bc93416d4f6f)]
+    coclass HostObjectMeasure
+    {
+        [default] interface IHostObjectMeasure;
+        interface IDispatch;
+    };
+    //! [HostObjectMeterInterface]
+    [uuid(c92b5351-67ac-4ee9-a542-2d9d79df5dff), object, local]
+    interface IHostObjectMeter : IUnknown
+    {
+        // Methods
+        HRESULT GetOption([in] BSTR, [in] BOOL, [out, retval] BSTR*);
+        HRESULT Update();
+
+        [propget] HRESULT Hidden([out, retval] BOOL*);
+        [propput] HRESULT Hidden([in] BOOL);
+        [propget] HRESULT X([out, retval] int*);
+        [propput] HRESULT X([in] int);
+        [propget] HRESULT Y([out, retval] int*);
+        [propput] HRESULT Y([in] int);
+        [propget] HRESULT Width([out, retval] int*);
+        [propput] HRESULT Width([in] int);
+        [propget] HRESULT Height([out, retval] int*);
+        [propput] HRESULT Height([in] int);
+        [propget] HRESULT DynamicVariables([out, retval] BOOL*);
+        [propput] HRESULT DynamicVariables([in] BOOL);
+    };
+    //! [HostObjectMeterInterface]
+
+    [uuid(dc640802-afb6-452c-8968-9056c63df4fb)]
+    coclass HostObjectMeter
+    {
+        [default] interface IHostObjectMeter;
+        interface IDispatch;
+    };
+
+    //! [HostObjectRmAPIInterface]
+    [uuid(3a14c9c0-bc3e-453f-a314-4ce4a0ec81d8), object, local]
+    interface IHostObjectRmAPI : IUnknown
+    {
+        // Demonstrate basic method call with some parameters and a return value.
+        HRESULT GetMeasure([in] BSTR name, [out, retval] HostObjectMeasure** measureObj);
+        HRESULT GetMeter([in] BSTR name, [out, retval] HostObjectMeter** meterObj);
+        HRESULT GetVariable([in] BSTR stringParameter, [out, retval] BSTR* stringResult);
+        HRESULT GetOption([in] BSTR stringParameter, [in] BOOL replaceVariables, [out, retval] BSTR* stringResult);
+        HRESULT Bang([in] BSTR stringParameter);
+        HRESULT Log([in] BSTR stringParameter);
+    };
+    //! [HostObjectRmAPIInterface]
+
+    [uuid(637abc45-11f7-4dde-84b4-317d62a638d3)]
+    coclass HostObjectRmAPI
+    {
+        [default] interface IHostObjectRmAPI;
+        interface IDispatch;
+    };
+}

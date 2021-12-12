@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+
+build
+dist
+HostObject_i.c
+HostObject_h.h
+PluginWebView.tlb
+PluginWebView.res
+RCa*
+
+skin_definition.json
